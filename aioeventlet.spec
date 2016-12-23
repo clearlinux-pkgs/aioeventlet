@@ -4,7 +4,7 @@
 #
 Name     : aioeventlet
 Version  : 0.5.1
-Release  : 19
+Release  : 20
 URL      : https://pypi.python.org/packages/source/a/aioeventlet/aioeventlet-0.5.1.tar.gz
 Source0  : https://pypi.python.org/packages/source/a/aioeventlet/aioeventlet-0.5.1.tar.gz
 Summary  : asyncio event loop scheduling callbacks in eventlet.
