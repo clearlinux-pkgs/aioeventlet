@@ -4,7 +4,7 @@
 #
 Name     : aioeventlet
 Version  : 0.5.1
-Release  : 22
+Release  : 23
 URL      : https://pypi.python.org/packages/source/a/aioeventlet/aioeventlet-0.5.1.tar.gz
 Source0  : https://pypi.python.org/packages/source/a/aioeventlet/aioeventlet-0.5.1.tar.gz
 Summary  : asyncio event loop scheduling callbacks in eventlet.
@@ -12,7 +12,6 @@ Group    : Development/Tools
 License  : Apache-2.0
 Requires: aioeventlet-python
 BuildRequires : eventlet
-BuildRequires : funcsigs-python
 BuildRequires : greenlet
 BuildRequires : pbr
 BuildRequires : pip
@@ -40,6 +39,8 @@ python components for the aioeventlet package.
 %setup -q -n aioeventlet-0.5.1
 
 %build
+export LANG=C
+export SOURCE_DATE_EPOCH=1484528009
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
@@ -49,9 +50,10 @@ export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 python runtests.py --verbose || :
 %install
+export SOURCE_DATE_EPOCH=1484528009
 rm -rf %{buildroot}
-python2 -tt setup.py build -b py2 install --root=%{buildroot}
-python3 -tt setup.py build -b py3 install --root=%{buildroot}
+python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
+python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
 
 %files
 %defattr(-,root,root,-)
