@@ -4,7 +4,7 @@
 #
 Name     : aioeventlet
 Version  : 0.5.2
-Release  : 29
+Release  : 30
 URL      : https://files.pythonhosted.org/packages/ee/1a/1573ef35a49bfe0144a98a9bdd40ac5a692e9a117ac8735e682e03dc39ce/aioeventlet-0.5.2.tar.gz
 Source0  : https://files.pythonhosted.org/packages/ee/1a/1573ef35a49bfe0144a98a9bdd40ac5a692e9a117ac8735e682e03dc39ce/aioeventlet-0.5.2.tar.gz
 Summary  : asyncio event loop scheduling callbacks in eventlet.
@@ -64,7 +64,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1532239360
+export SOURCE_DATE_EPOCH=1532242309
 python3 setup.py build -b py3
 
 %check
