@@ -4,7 +4,7 @@
 #
 Name     : aioeventlet
 Version  : 0.5.2
-Release  : 33
+Release  : 34
 URL      : http://pypi.debian.net/aioeventlet/aioeventlet-0.5.2.tar.gz
 Source0  : http://pypi.debian.net/aioeventlet/aioeventlet-0.5.2.tar.gz
 Summary  : asyncio event loop scheduling callbacks in eventlet.
