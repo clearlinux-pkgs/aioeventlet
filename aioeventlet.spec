@@ -4,31 +4,26 @@
 #
 Name     : aioeventlet
 Version  : 0.5.2
-Release  : 36
+Release  : 37
 URL      : http://pypi.debian.net/aioeventlet/aioeventlet-0.5.2.tar.gz
 Source0  : http://pypi.debian.net/aioeventlet/aioeventlet-0.5.2.tar.gz
 Summary  : asyncio event loop scheduling callbacks in eventlet.
 Group    : Development/Tools
 License  : Apache-2.0
-Requires: aioeventlet-python3
-Requires: aioeventlet-license
-Requires: aioeventlet-python
+Requires: aioeventlet-license = %{version}-%{release}
+Requires: aioeventlet-python = %{version}-%{release}
+Requires: aioeventlet-python3 = %{version}-%{release}
 Requires: eventlet
 Requires: trollius
 BuildRequires : buildreq-distutils3
 BuildRequires : eventlet
 BuildRequires : greenlet
-BuildRequires : pbr
-BuildRequires : pip
 BuildRequires : python-mock
-BuildRequires : python3-dev
-BuildRequires : setuptools
 BuildRequires : trollius
 
 %description
+aioeventlet implements the asyncio API (PEP 3156) on top of eventlet. It makes
 possible to write asyncio code in a project currently written for eventlet.
-        
-        aioeventlet allows to use greenthreads in asyncio coroutines, and to use
 
 %package license
 Summary: license components for the aioeventlet package.
@@ -41,7 +36,7 @@ license components for the aioeventlet package.
 %package python
 Summary: python components for the aioeventlet package.
 Group: Default
-Requires: aioeventlet-python3
+Requires: aioeventlet-python3 = %{version}-%{release}
 
 %description python
 python components for the aioeventlet package.
@@ -58,14 +53,22 @@ python3 components for the aioeventlet package.
 
 %prep
 %setup -q -n aioeventlet-0.5.1
+cd %{_builddir}/aioeventlet-0.5.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1532268640
-python3 setup.py build -b py3
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1582845030
+# -Werror is for werrorists
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
+export MAKEFLAGS=%{?_smp_mflags}
+python3 setup.py build
 
 %check
 export http_proxy=http://127.0.0.1:9/
@@ -73,10 +76,11 @@ export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 python runtests.py --verbose || :
 %install
+export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/aioeventlet
-cp COPYING %{buildroot}/usr/share/doc/aioeventlet/COPYING
-python3 -tt setup.py build -b py3 install --root=%{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/aioeventlet
+cp %{_builddir}/aioeventlet-0.5.1/COPYING %{buildroot}/usr/share/package-licenses/aioeventlet/5feaf15b3fa7d2d226d811e5fcd49098a1ea520c
+python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -85,8 +89,8 @@ echo ----[ mark ]----
 %defattr(-,root,root,-)
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/aioeventlet/COPYING
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/aioeventlet/5feaf15b3fa7d2d226d811e5fcd49098a1ea520c
 
 %files python
 %defattr(-,root,root,-)
