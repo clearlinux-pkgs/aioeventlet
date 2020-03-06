@@ -4,7 +4,7 @@
 #
 Name     : aioeventlet
 Version  : 0.5.2
-Release  : 37
+Release  : 38
 URL      : http://pypi.debian.net/aioeventlet/aioeventlet-0.5.2.tar.gz
 Source0  : http://pypi.debian.net/aioeventlet/aioeventlet-0.5.2.tar.gz
 Summary  : asyncio event loop scheduling callbacks in eventlet.
@@ -22,8 +22,9 @@ BuildRequires : python-mock
 BuildRequires : trollius
 
 %description
-aioeventlet implements the asyncio API (PEP 3156) on top of eventlet. It makes
 possible to write asyncio code in a project currently written for eventlet.
+        
+        aioeventlet allows to use greenthreads in asyncio coroutines, and to use
 
 %package license
 Summary: license components for the aioeventlet package.
@@ -46,6 +47,8 @@ python components for the aioeventlet package.
 Summary: python3 components for the aioeventlet package.
 Group: Default
 Requires: python3-core
+Provides: pypi(aioeventlet)
+Requires: pypi(eventlet)
 
 %description python3
 python3 components for the aioeventlet package.
@@ -60,8 +63,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1582845030
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1583524832
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
